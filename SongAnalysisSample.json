@@ -1,0 +1,22 @@
+{
+	"username" : "John Doe",
+	"history" : [
+		{
+			"timestamp" : "<timestamp>",
+			"songs" : [
+				{
+					"name" : "<name of the song1",
+					"sentiment" : "<sentiment like sad, anger, etc.>"
+				},
+				{
+					"name" : "<name of the song2",
+					"sentiment" : "<sentiment like sad, anger, etc.>"
+				},
+				{
+					"name" : "<name of the song3",
+					"sentiment" : "<sentiment like sad, anger, etc.>"
+				}
+			]
+		}
+	]
+}
