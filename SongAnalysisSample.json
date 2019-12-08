@@ -5,16 +5,19 @@
 			"timestamp" : "<timestamp>",
 			"songs" : [
 				{
-					"name" : "<name of the song1",
-					"sentiment" : "<sentiment like sad, anger, etc.>"
+					"id" : 0,
+					"name" : "song1",
+					"sentiment" : "sad"
 				},
 				{
-					"name" : "<name of the song2",
-					"sentiment" : "<sentiment like sad, anger, etc.>"
+					"id" : 1,
+					"name" : "song2",
+					"sentiment" : "anger"
 				},
 				{
-					"name" : "<name of the song3",
-					"sentiment" : "<sentiment like sad, anger, etc.>"
+					"id" : 2,
+					"name" : "song3",
+					"sentiment" : "happy"
 				}
 			]
 		}
