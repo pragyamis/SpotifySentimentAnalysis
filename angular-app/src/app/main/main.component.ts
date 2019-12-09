@@ -28,10 +28,6 @@ export class MainComponent implements OnInit {
 
   }
 
-  fireEvent() {
-    this.childEvent.emit('Hey Parent App. How are you doing?');
-  }
-
   countElement(name: string, historyElement: IHistory): number {
     return historyElement.songs.filter(function (element) {
       return element.sentiment == name;
