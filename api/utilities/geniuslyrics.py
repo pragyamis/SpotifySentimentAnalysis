@@ -10,7 +10,7 @@ def geniuslyricspull():
     song_titles = pd.read_csv("user1_songlisten_data.csv")
     song_titles.fillna('').replace('', np.nan)
 
-    print(song_titles['song_names'][0])
+    #print(song_titles['song_names'][0])
 
     #in general additional artists are included in the some name 
     #(example: THRU THE NIGHT (feat. Bryson Tiller)" by Jack Harlow)
@@ -22,7 +22,7 @@ def geniuslyricspull():
     song_titles.rename(
         columns = {'song_names':'song_title'}, 
         inplace = True)
-    print(song_titles.columns)
+    #print(song_titles.columns)
     #print(song_titles)
 
     all_song_data = pd.DataFrame()
@@ -62,5 +62,6 @@ def geniuslyricspull():
         }
         all_song_data = all_song_data.append(row, ignore_index=True)
 
-        print(all_song_data)
+        #print(all_song_data)
     all_song_data.to_csv("user1_songlyrics_data.csv")
+    return all_song_data
