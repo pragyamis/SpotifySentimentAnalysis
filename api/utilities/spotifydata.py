@@ -69,7 +69,7 @@ def spotify_current_user_recently_played(token):
     "fifth_artist" : fifth_artist
     })
     user_songlisten_data
-    print(type(user_songlisten_data))
+    #print(type(user_songlisten_data))
 
     #output file
     user_songlisten_data.to_csv("user1_songlisten_data.csv", encoding='utf-8', index=False)
