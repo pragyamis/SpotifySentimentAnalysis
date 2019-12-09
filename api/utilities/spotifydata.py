@@ -68,7 +68,7 @@ def spotify_current_user_recently_played(token):
     "fourth_artist" : fourth_artist,  
     "fifth_artist" : fifth_artist
     })
-    user_songlisten_data
+    #user_songlisten_data
     #print(type(user_songlisten_data))
 
     #output file
