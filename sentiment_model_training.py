@@ -5,20 +5,21 @@ from pyspark.sql.functions import *
 from pyspark.ml.classification import LogisticRegression
 from pyspark.ml.feature import HashingTF, Tokenizer, StopWordsRemover, IDF
 from pyspark.ml import Pipeline
-from pyspark.ml.feature import StringIndexer
+from pyspark.ml.feature import StringIndexer, IndexToString
 from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
 from pyspark.ml.evaluation import  MulticlassClassificationEvaluator
+from pyspark.ml.classification import LogisticRegressionModel
 
-
-class SentAnalysis(object):
+class SentAnalysisModelTraining(object):
     def __init__(self):
-        self.appName = "Sentiment Analysis in Spark"
+        print("Initializing SentAnalysisModelTraining!!");
+        self.appName = "Sentiment Analysis Model Training"
         # create Spark session
         self.spark = SparkSession.builder.appName(self.appName) \
             .config("spark.executor.heartbeatInterval", "200000") \
             .config("spark.network.timeout", "300000") \
             .getOrCreate()
-
+        self.modelpath = "sentiment.model"
         self.data = None
         self.training_data = None
         self.testing_data = None
@@ -29,6 +30,11 @@ class SentAnalysis(object):
         self.predict_training_data = None
         self.predict_testing_data = None
         self.cv_model = None
+        self.labeled_output = None
+        self.tokenizer = None
+        self.stopwordsRemover = None
+        self.hashTF = None
+        self.labededIndexer = None
         return
 
 
@@ -44,6 +50,7 @@ class SentAnalysis(object):
         # and cast "Sentiment" column data into integer
         self.data = emotion_csv.select("content", "sentiment")
         self.data.show(truncate=False, n=10)
+
         return self.data.count
 
     # divide data, 70% for training, 30% for testing
@@ -58,11 +65,13 @@ class SentAnalysis(object):
 
     def create_pipeline(self):
         # Creating all the pipeline elements
-        tokenizer = Tokenizer(inputCol="content", outputCol="SentimentWords")
+        self.tokenizer = Tokenizer(inputCol="content", outputCol="SentimentWords")
         labelStringIdx = StringIndexer(inputCol="sentiment", outputCol="label")
-        stopwordsRemover = StopWordsRemover(inputCol=tokenizer.getOutputCol(), outputCol="RelevantWords")
-        hashTF = HashingTF(inputCol=stopwordsRemover.getOutputCol(), outputCol="features")
-        self.pipeline = Pipeline(stages=[tokenizer, labelStringIdx, stopwordsRemover, hashTF])
+        self.labededIndexer = labelStringIdx.fit(self.training_data)
+
+        self.stopwordsRemover = StopWordsRemover(inputCol=self.tokenizer.getOutputCol(), outputCol="RelevantWords")
+        self.hashTF = HashingTF(inputCol=self.stopwordsRemover.getOutputCol(), outputCol="features")
+        self.pipeline = Pipeline(stages=[self.tokenizer, labelStringIdx, self.stopwordsRemover, self.hashTF])
 
         lr = LogisticRegression(labelCol="label", featuresCol="features", maxIter=15, regParam=0.001, \
                                 elasticNetParam=0.8, family="multinomial")
@@ -78,8 +87,7 @@ class SentAnalysis(object):
 
         paramGrid = ParamGridBuilder() \
             .addGrid(lr.aggregationDepth, [2]) \
-            .addGrid(lr.elasticNetParam, [0.0, 0.8]) \
-            .addGrid(lr.fitIntercept, [False, True]) \
+            .addGrid(lr.elasticNetParam, [0.8]) \
             .addGrid(lr.maxIter, [15]) \
             .addGrid(lr.regParam, [0.001]) \
             .build()
@@ -100,7 +108,6 @@ class SentAnalysis(object):
         # this will likely take a fair amount of time because of the amount of models that we're creating and testing
         self.predict_training_data = self.cv_model.transform(dataset)
         print("The area under ROC for train set after CV  is {}".format(self.evaluator.evaluate(self.predict_training_data)))
-
         print("Training is done!")
         return
 
@@ -167,14 +174,22 @@ class SentAnalysis(object):
               % (accuracy, falsePositiveRate, truePositiveRate, fMeasure, precision, recall))
         return
 
+    def save_model_pipeline(self):
+        # pipeline for later deriving value from actual field.
+        labelConverter = IndexToString(inputCol="prediction", outputCol="predictionLabel", labels=self.labededIndexer.labels)
+        pipeline = Pipeline(stages=[self.tokenizer, self.stopwordsRemover, self.hashTF, self.cv_model.bestModel, labelConverter])
+        pipeline.write().overwrite().save("prediction_pipeline")
+
+
 def main():
-    sent_analysis = SentAnalysis()
+    sent_analysis = SentAnalysisModelTraining()
     sent_analysis.read_data()
     sent_analysis.split_data()
     sent_analysis.create_pipeline()
     sent_analysis.train_model()
     sent_analysis.test_model()
     sent_analysis.print_model_summary()
+    sent_analysis.save_model_pipeline()
 
 if __name__ == '__main__':
     main()
