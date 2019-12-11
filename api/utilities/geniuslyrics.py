@@ -4,10 +4,10 @@ import requests
 import lyricsgenius as lg
 import re
 
-def geniuslyricspull():
+def geniuslyricspull(song_titles):
     genius = lg.Genius("eOwlhC7-N4Lr7bq9YUD8J-khhwTxKwi0svZVzwlN2Io8shw4RW9pLcaUU6yLMK_K")
 
-    song_titles = pd.read_csv("user1_songlisten_data.csv")
+    #song_titles = pd.read_csv("user1_songlisten_data.csv")
     song_titles.fillna('').replace('', np.nan)
 
     #print(song_titles['song_names'][0])
