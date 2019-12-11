@@ -43,7 +43,18 @@ def api_all():
     #if 'token' in request.args:
     #    token = int(request.args['token'])
     user_songlisten_data = spotify_current_user_recently_played(token)
+    
     lyrics_data = geniuslyrics(user_songlisten_data)
+    lyrics_data['Lyrics'] = lyrics_data['Lyrics'].str.replace('\[[A-Za-z0-9: ]+\] ','')
+    sent_prediction_list = []
+    for i in lyrics_test['Lyrics']:
+        sent_prediction_list.append(sent_prediction.predict_sentiment(i))
+    
+    sentiment_data = pd.DataFrame(
+    {   "sentiment" : sent_prediction_list 
+    })
+    sentiment_data = lyrics_data.assign(sentiment=sentiment_data)
+
     #sentiment_data = #sentanalysis call(lyrics_data)  # should be in format of dictionary
     # temp-------------------------------------------
     filename = '..\SongAnalysisSample.json'
