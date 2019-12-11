@@ -63,5 +63,5 @@ def geniuslyricspull():
         all_song_data = all_song_data.append(row, ignore_index=True)
 
         #print(all_song_data)
-    all_song_data.to_csv("user1_songlyrics_data.csv")
+    #all_song_data.to_csv("user1_songlyrics_data.csv")
     return all_song_data
