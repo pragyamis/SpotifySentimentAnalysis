@@ -19,8 +19,8 @@ def spotify_current_user_recently_played(token):
     spotify.current_user_recently_played = types.MethodType(current_user_recently_played, spotify)
     recent_listening = spotify.current_user_recently_played(limit=50)
 
-    play_times, song_names, song_uri ,song_popularity ,song_duration , song_explicit ,  number_artists , primary_artist=[]
-    second_artist,third_artist,fourth_artist,fifth_artist = []
+    play_times, song_names, song_uri ,song_popularity ,song_duration , song_explicit ,  number_artists , primary_artist=[],[],[],[],[],[],[],[]
+    second_artist,third_artist,fourth_artist,fifth_artist = [],[],[],[]
 
     for i in range(len(recent_listening['items'])):
         play_times.append(recent_listening['items'][i]['played_at']) #play time (when track was played)
@@ -72,5 +72,6 @@ def spotify_current_user_recently_played(token):
     #print(type(user_songlisten_data))
 
     #output file
-    user_songlisten_data.to_csv("user1_songlisten_data.csv", encoding='utf-8', index=False)
+    #user_songlisten_data.to_csv("user1_songlisten_data.csv", encoding='utf-8', index=False)
+    
     return user_songlisten_data
