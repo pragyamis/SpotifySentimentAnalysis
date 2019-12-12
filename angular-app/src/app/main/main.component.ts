@@ -3,6 +3,7 @@ import { SentanalysisService } from '../sentanalysis.service';
 import { IUserInfo, IHistory, ISongs, ISongSentimentData } from '../userinfo';
 import * as c3 from 'c3';
 import { isUndefined } from 'util';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -12,11 +13,31 @@ import { isUndefined } from 'util';
 export class MainComponent implements OnInit {
 
   @Input('parentData') public parentName;
+  routeParams: Params;
+  // Query parameters found in the URL: /example-params/one/two?query1=one&query2=two
+  queryParams: Params;
   public username = "Unknown";
   public isVisible = true;
   public songData: IUserInfo;
+  public accessToken;
 
-  constructor(private _analysisService: SentanalysisService) { }
+  constructor(private _analysisService: SentanalysisService,  private activatedRoute: ActivatedRoute) {
+    this.getRouteParams();
+   }
+
+  getRouteParams() {
+        // Route parameters
+        this.activatedRoute.params.subscribe( params => {
+            this.routeParams = params;
+        });
+
+        // URL query parameters
+        this.activatedRoute.queryParams.subscribe( params => {
+            this.queryParams = params;
+            this.accessToken = params.access_token
+        });
+    }
+
 
   @Output() public childEvent = new EventEmitter();
 
@@ -24,8 +45,7 @@ export class MainComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this._analysisService.getSongHistory().subscribe(data => this.processHistoryData(data));
-
+    this._analysisService.getSongHistory(this.accessToken).subscribe(data => this.processHistoryData(data));
   }
 
   countElement(name: string, historyElement: IHistory): number {
