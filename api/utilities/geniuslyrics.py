@@ -41,6 +41,7 @@ def geniuslyricspull(song_titles):
             song = genius.search_song(song_title, artist=artist_name)
             song_album = song.album
             song_lyrics = re.sub("\n", " ", song.lyrics) #Remove newline breaks, we won't need them.
+            song_lyrics = song_lyrics.str.replace('\[[A-Za-z0-9: ]+\] ','')
             song_url = song.url
             song_artist = song.artist
             song_year = song.year
