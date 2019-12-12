@@ -24,7 +24,7 @@ var cookieParser = require('cookie-parser');
 
 var client_id = process.argv[2];
 var client_secret = process.argv[3];
-var redirect_uri = 'http://3.15.223.174:4200/'; // Your redirect uri
+var redirect_uri = 'http://3.15.223.174:4200/main'; // Your redirect uri
 var mobile_redirect_uri = 'https://obscurifymusic.com/mobile_callback';
 var mobile_local_redirect_uri = 'https://obscurifymusic.com/mobile_local_callback';
 
@@ -66,7 +66,7 @@ app.get('/login', function(req, res) {
   var scope = 'user-read-private user-top-read playlist-modify-public playlist-modify-private';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
-      response_type: 'code',
+      response_type: 'token',
       client_id: client_id,
       scope: scope,
       redirect_uri: redirect_uri,

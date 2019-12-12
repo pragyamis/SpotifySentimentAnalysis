@@ -10,9 +10,9 @@ from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
 from pyspark.ml.evaluation import  MulticlassClassificationEvaluator
 from pyspark.ml.classification import LogisticRegressionModel
 
-class SentAnalysisModelTraining(object):
+class SentAnalysisPrediction(object):
     def __init__(self):
-        print("Initializing SentAnalysisModelTraining!!");
+        print("Initializing SentAnalysisProdiction!!");
         self.appName = "Sentiment Analysis in Spark"
         # create Spark session
         self.spark = SparkSession.builder.appName(self.appName) \
