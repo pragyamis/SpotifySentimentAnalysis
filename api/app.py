@@ -2,71 +2,35 @@
 # coding: utf-8
 
 # In[4]:
-
 from flask import Flask
 from flask import request, jsonify
-from flask import Flask, redirect, request, session, url_for, jsonify
+from flask import Flask, render_template, redirect, request, session, make_response
 import json
 from json import dumps
 from utilities import spotifydata
 from utilities import geniuslyrics
+import spotipy
 import spotipy.util as util
-#import sentiment_analysis
-
+import pandas as pd
+import sys
+sys.path.insert(0,'..')
+import sentiment_prediction as sp
 app = Flask(__name__)
 app.config["DEBUG"] = True
-app.config['SECRET_KEY'] = 'supersecret'
 
-token = util.prompt_for_user_token(
-        username="psamrai7",
-        scope="user-read-recently-played user-read-private user-top-read user-read-currently-playing",
-        client_id="06fbc86c86fb476fa9154ebbcea09a2a",
-        client_secret="1ad66a32c99944ffa9728e38629c5ebb",
-        redirect_uri="http://localhost/")   
-
-def get_songs(data):    
-    for p in data['history'][0]['songs']:
-            print('id: ' + p['id'])
-            print('name: ' + p['name'])
-            print('sentiment: ' + p['sentiment'])        
-            print('')
-        
-@app.route('/', methods=['GET'])
-def home():
-    return '''<h1>Songs Sentiment Archive</h1>
-<p>A prototype API for Songs Sentiment Analysis</p>'''
-
-
-# A route to return all of the available entries in our catalog.
 @app.route('/songs', methods=['GET'])
-def api_all():
-    #if 'token' in request.args:
-    #    token = int(request.args['token'])
-    user_songlisten_data = spotify_current_user_recently_played(token)
-    
-    lyrics_data = geniuslyrics(user_songlisten_data)
-    lyrics_data['Lyrics'] = lyrics_data['Lyrics'].str.replace('\[[A-Za-z0-9: ]+\] ','')
-    sent_prediction_list = []
-    for i in lyrics_test['Lyrics']:
-        sent_prediction_list.append(sent_prediction.predict_sentiment(i))
-    
-    sentiment_data = pd.DataFrame(
-    {   "sentiment" : sent_prediction_list 
-    })
-    sentiment_data = lyrics_data.assign(sentiment=sentiment_data)
-
-    #sentiment_data = #sentanalysis call(lyrics_data)  # should be in format of dictionary
-    # temp-------------------------------------------
-    filename = '..\SongAnalysisSample.json'
-    with open(filename) as json_file:
-        sentiment_data = json.load(json_file)
-    #--------------------------------------------------
+def query_strings():
+    token = request.args['access_token']
+    song_titles =   spotify_current_user_recently_played(token)
+    #song_titles = pd.read_csv('.//utilities//user1_songlisten_data.csv')
+    all_song_data = geniuslyrics.geniuslyricspull(song_titles.head(2))
+    all_song_data['Sentiment'] = all_song_data.Lyrics.apply(lambda x: sp.predict_sentiment(x))
     #output file
-    with open('sentimentdata.txt', 'w') as outfile:
-        json.dump(sentiment_data, outfile)
-    return jsonify(sentiment_data['history'][0]['songs'])
+    with open('song_sentiments.json', 'w') as outfile:
+        json.dump(all_song_data[['Song Title','Sentiment']].to_json(orient ='records'), outfile)
+    return jsonify(all_song_data[['Song Title','Sentiment']])
     
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80)
+    app.run(debug=True)
 
 
