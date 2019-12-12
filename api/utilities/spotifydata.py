@@ -17,7 +17,7 @@ def spotify_current_user_recently_played(token):
     spotify = spotipy.Spotify(auth=token)
 
     spotify.current_user_recently_played = types.MethodType(current_user_recently_played, spotify)
-    recent_listening = spotify.current_user_recently_played(limit=50)
+    recent_listening = spotify.current_user_recently_played(limit=10)
 
     play_times, song_names, song_uri ,song_popularity ,song_duration , song_explicit ,  number_artists , primary_artist=[],[],[],[],[],[],[],[]
     second_artist,third_artist,fourth_artist,fifth_artist = [],[],[],[]
