@@ -12,7 +12,6 @@ from api.utilities import spotifydata
 from api.utilities import geniuslyrics
 import spotipy.util as util
 import sentiment_prediction as sa
-import jsonpickle
 
 #import sentiment_analysis
 
@@ -46,11 +45,6 @@ class song_data:
     sentiment = ''
 
 
-
-class JsonTransformer(object):
-    def transform(self, myObject):
-        return jsonpickle.encode(myObject, unpicklable=False)
-
 # A route to return all of the available entries in our catalog.
 @app.route('/songs', methods=['GET'])
 def api_all():
@@ -67,8 +61,6 @@ def api_all():
 
     lyrics_data = geniuslyrics.geniuslyricspull(user_songlisten_data)
     lyrics_data['Lyrics'] = lyrics_data['Lyrics'].str.replace('\[[A-Za-z0-9: ]+\] ','')
-    sent_prediction_list = []
-    prd_list = []
 
     for index, song in lyrics_data.iterrows():
         songObject = song_data()
