@@ -6,6 +6,7 @@
 from flask import Flask
 from flask import request, jsonify
 from flask import Flask, redirect, request, session, url_for, jsonify
+from flask_cors import CORS
 import json
 from json import dumps
 from api.utilities import spotifydata
@@ -28,6 +29,7 @@ def get_usertoken():
             client_secret="5edc515babd54bd1959b3a5624cf548e",
             redirect_uri="http://3.15.223.174:4200/main")
 
+@cross_origin()
 def get_songs(data):
     for p in data['history'][0]['songs']:
             print('id: ' + p['id'])
