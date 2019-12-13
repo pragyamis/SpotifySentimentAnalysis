@@ -6,18 +6,19 @@
 from flask import Flask
 from flask import request, jsonify
 from flask import Flask, redirect, request, session, url_for, jsonify
-import json
+from flask_cors import CORS
+import jsons
 from json import dumps
 from api.utilities import spotifydata
 from api.utilities import geniuslyrics
 import spotipy.util as util
 import sentiment_prediction as sa
-import jsonpickle
 
 #import sentiment_analysis
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
+cors = CORS(app, resources={"/*": {"origins": "*"}})
+app.config["DEBUG"] = False
 app.config['SECRET_KEY'] = 'supersecret'
 sent_p = sa.SentAnalysisPrediction()
 
@@ -41,15 +42,24 @@ def home():
     return '''<h1>Songs Sentiment Archive</h1>
 <p>A prototype API for Songs Sentiment Analysis</p>'''
 
+class response_object:
+    username = ''
+    history = []
+
+class history:
+    timestamp = None
+    songs = []
+
 class song_data:
     name = ''
     sentiment = ''
+    lyrics = ''
 
-
-
-class JsonTransformer(object):
-    def transform(self, myObject):
-        return jsonpickle.encode(myObject, unpicklable=False)
+def dumper(obj):
+    try:
+        return obj.toJSON()
+    except:
+        return obj.__dict__
 
 # A route to return all of the available entries in our catalog.
 @app.route('/songs', methods=['GET'])
@@ -67,8 +77,6 @@ def api_all():
 
     lyrics_data = geniuslyrics.geniuslyricspull(user_songlisten_data)
     lyrics_data['Lyrics'] = lyrics_data['Lyrics'].str.replace('\[[A-Za-z0-9: ]+\] ','')
-    sent_prediction_list = []
-    prd_list = []
 
     for index, song in lyrics_data.iterrows():
         songObject = song_data()
@@ -77,11 +85,31 @@ def api_all():
         songObject.sentiment = sent_p.predict_sentiment(songObject.lyrics)
         song_list.append(songObject)
 
-    app_json = json.dumps([p.__dict__ for p in song_list])
+    res : response_object = response_object()
+    res.username = ''
+
+    hist = history()
+    hist.songs = song_list
+    hist.timestamp = "12-01-2019"
+
+    hist2 = history()
+    hist2.songs = song_list
+    hist2.timestamp = "12-02-2019"
+
+    hist3 = history()
+    hist3.songs = song_list
+    hist3.timestamp = "12-03-2019"
+
+    res.history.append(hist)
+    res.history.append(hist2)
+    res.history.append(hist3)
+    #app_json = json.dumps(res)
+    app_json = jsons.dumps(res)
+
     return app_json
 
     
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=4201)
 
 
