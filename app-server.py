@@ -16,7 +16,7 @@ import sentiment_prediction as sa
 #import sentiment_analysis
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
+app.config["DEBUG"] = False
 app.config['SECRET_KEY'] = 'supersecret'
 sent_p = sa.SentAnalysisPrediction()
 
