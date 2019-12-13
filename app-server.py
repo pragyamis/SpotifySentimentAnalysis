@@ -71,7 +71,7 @@ def api_all():
         history.append(history_dict)
     result = {"user":"","history":history}
     app_json = json.dumps(result, default=json_serial))
-        return app_json
+    return app_json
 
     
 if __name__ == '__main__':
