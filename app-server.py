@@ -7,13 +7,14 @@ from flask import Flask
 from flask import request, jsonify
 from flask import Flask, redirect, request, session, url_for, jsonify
 from flask_cors import CORS
-import jsons
+import json
 from json import dumps
 from api.utilities import spotifydata
 from api.utilities import geniuslyrics
 import spotipy.util as util
 import sentiment_prediction as sa
 from datetime import date, datetime
+import pandas as pd
 
 #import sentiment_analysis
 
@@ -70,11 +71,12 @@ def api_all():
         history_dict['songs'] = df1.to_dict('records')
         history.append(history_dict)
     result = {"user":"","history":history}
-    app_json = json.dumps(result, default=json_serial))
+    app_json = json.dumps(result, default=json_serial)
     return app_json
 
     
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=4201)
+
 
 
