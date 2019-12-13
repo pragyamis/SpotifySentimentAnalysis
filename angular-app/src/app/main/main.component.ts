@@ -16,7 +16,7 @@ export class MainComponent implements OnInit {
   routeParams: Params;
   // Query parameters found in the URL: /example-params/one/two?query1=one&query2=two
   queryParams: Params;
-  public username = "Unknown";
+  public username = "User";
   public isVisible = true;
   public songData: IUserInfo;
   public accessToken;
@@ -34,7 +34,9 @@ export class MainComponent implements OnInit {
         // URL query parameters
         this.activatedRoute.queryParams.subscribe( params => {
             this.queryParams = params;
-            this.accessToken = params.access_token
+            // TODO - fix this logic
+            // this.accessToken = params.access_token;
+            this.accessToken = "BQCPMHMZUWvjU-EINDyX_pYKBBhCnN3ekPgfZmStWGegntfVSYPn2zWFzO7lw_EIe7RXlhKs1utiHwKqcaHM0YaJF5ZSwxzRDG_ffo8Hj2-RYTuN7jLNCX2jFzjk5G3s3a2z1mysa_Wq7yOAY-Hx0Hpa1xu66sHl51S0zTYYzEFQ6lhRmi-dZBhEzOKgpcHfxMNEDXvZS2zdJeYFEgiWfmzJnaIkaH_TRWfaX9xJTWZYk1GTZBcHqw";
         });
     }
 
