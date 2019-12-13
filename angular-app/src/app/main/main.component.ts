@@ -60,8 +60,10 @@ export class MainComponent implements OnInit {
     let sentArray = new Array<any>();
     this.username = songData.username;
 
-    sentArray.push(this.formElement('sad', songData.history));
-    sentArray.push(this.formElement('happy', songData.history));
+    sentArray.push(this.formElement('sadness', songData.history));
+    sentArray.push(this.formElement('happiness', songData.history));
+    sentArray.push(this.formElement('anger', songData.history));
+    sentArray.push(this.formElement('neutral', songData.history));
 
     return sentArray;
   }
