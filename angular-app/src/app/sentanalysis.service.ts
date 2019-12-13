@@ -9,7 +9,8 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class SentanalysisService {
 
-  private _url : string = "http://localhost:8089/sentimentanalysis/v1/";
+  private _url : string = "http://3.15.223.174:4201/sentimentanalysis/v1/";
+
   constructor(private http : HttpClient) { }
 
   public getSongHistory(accessToken) : Observable<IUserInfo>{

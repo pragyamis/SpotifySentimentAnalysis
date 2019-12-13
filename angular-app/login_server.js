@@ -14,8 +14,8 @@ var url = require('url');
 // var privateKey  = fs.readFileSync('/etc/letsencrypt/live/obscurifymusic.com/privkey.pem', 'utf8');
 // var certificate = fs.readFileSync('/etc/letsencrypt/live/obscurifymusic.com/fullchain.pem', 'utf8');
 // var privateKey  = fs.readFileSync('C:/Studies/MCS-TextInformationSystem/project/keys-certs/openssl.key', 'utf8');
-var privateKey  = fs.readFileSync('C:/Studies/MCS-TextInformationSystem/project/keys-certs/key.pem', 'utf8');
-var certificate = fs.readFileSync('C:/Studies/MCS-TextInformationSystem/project/keys-certs/certificate.pem', 'utf8');
+var privateKey  = fs.readFileSync('/home/songsent/project/SpotifySentimentAnalysis/keys/key.pem', 'utf8');
+var certificate = fs.readFileSync('/home/songsent/project/SpotifySentimentAnalysis/keys/certificate.pem', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
@@ -286,5 +286,5 @@ app.get('/refresh_token', function(req, res) {
 // app.listen(8001);
 
 var httpsServer = https.createServer(credentials, app);
-console.log('Listening on 8001');
-httpsServer.listen(8001);
+console.log('Listening on 4202');
+httpsServer.listen(4202);
