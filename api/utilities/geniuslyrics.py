@@ -45,7 +45,6 @@ def geniuslyricspull(song_titles):
             song_url = song.url
             song_artist = song.artist
             song_year = song.year
-
         except:
             song_album = "null"
             song_lyrics = "null"
@@ -54,6 +53,7 @@ def geniuslyricspull(song_titles):
             song_year = "null"
 
         row = {
+            "play_times": song_titles['play_times'][i],
             "Song Title": song_titles['song_title'][i],
             "Artist": song_titles['Artist'][i],
             "Song Artist": song_artist,
@@ -62,7 +62,8 @@ def geniuslyricspull(song_titles):
             "Release Date": song_year
         }
         all_song_data = all_song_data.append(row, ignore_index=True)
-
+        all_song_data['play_times'] = pd.to_datetime(all_song_data['play_times'])
+        all_song_data['play_date'] = all_song_data['play_times'].apply(lambda x: x.date())
         #print(all_song_data)
     #all_song_data.to_csv("user1_songlyrics_data.csv")
     return all_song_data
