@@ -22,6 +22,7 @@ def geniuslyricspull(song_titles):
     song_titles.rename(
         columns = {'song_names':'song_title'}, 
         inplace = True)
+
     #print(song_titles.columns)
     #print(song_titles)
 
@@ -41,11 +42,12 @@ def geniuslyricspull(song_titles):
             song = genius.search_song(song_title, artist=artist_name)
             song_album = song.album
             song_lyrics = re.sub("\n", " ", song.lyrics) #Remove newline breaks, we won't need them.
-            song_lyrics = song_lyrics.str.replace('\[[A-Za-z0-9: ]+\] ','')
+            song_lyrics = song_lyrics.replace('\[[A-Za-z0-9: ]+\] ','')
             song_url = song.url
             song_artist = song.artist
             song_year = song.year
-        except:
+        except Exception as e:
+            print("Exception at pulling data from genius {0}".format(e))
             song_album = "null"
             song_lyrics = "null"
             song_url = "null"
