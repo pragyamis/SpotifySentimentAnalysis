@@ -23,6 +23,18 @@ class SentAnalysisPrediction(object):
         self.pipeline = Pipeline.load(self.model_name)
         return
 
+    def predict_sentiment_with_cache(self, song_title, text, sentiment_cache):
+        try:
+            # if key doesn't exist, it throws a key error
+            predicted_sentiment = sentiment_cache[song_title]
+            print("found song in the sentiment cache {0}".format(song_title))
+        except Exception as e:
+            print("Exception while pulling data {0}".format(e))
+            predicted_sentiment = self.predict_sentiment(text)
+            sentiment_cache[song_title] = predicted_sentiment
+            print("saved sentiment {0} data for {1} to cache".format(predicted_sentiment, song_title))
+        return predicted_sentiment
+
     def predict_sentiment(self, text):
         cSchema = StructType().add("sentiment", StringType()).add("content", StringType())
 

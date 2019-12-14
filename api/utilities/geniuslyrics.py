@@ -4,7 +4,7 @@ import requests
 import lyricsgenius as lg
 import re
 
-def geniuslyricspull(song_titles):
+def geniuslyricspull(song_titles, cache):
     genius = lg.Genius("eOwlhC7-N4Lr7bq9YUD8J-khhwTxKwi0svZVzwlN2Io8shw4RW9pLcaUU6yLMK_K")
 
     #song_titles = pd.read_csv("user1_songlisten_data.csv")
@@ -39,7 +39,17 @@ def geniuslyricspull(song_titles):
         artist_name = re.sub(" and ", " & ", artist_name)
 
         try:
-            song = genius.search_song(song_title, artist=artist_name)
+            try:
+                # if key doesn't exist, it throws a key error
+                song = cache[song_title]
+                print("found song in the cache {0}".format(song))
+            except Exception as e:
+                print("Exception while pulling data {0}".format(e))
+
+                song = genius.search_song(song_title, artist=artist_name)
+                cache[song_title] = song
+                print("saved data for {0} to cache".format(song_title))
+
             song_album = song.album
             song_lyrics = re.sub("\n", " ", song.lyrics) #Remove newline breaks, we won't need them.
             song_lyrics = song_lyrics.replace('\[[A-Za-z0-9: ]+\] ','')
@@ -55,7 +65,7 @@ def geniuslyricspull(song_titles):
             song_year = "null"
 
         row = {
-            "Song Title": song_titles['song_title'][i],
+            "Song_Title": song_titles['song_title'][i],
             "Artist": song_titles['Artist'][i],
             "Song Artist": song_artist,
             "Lyrics": song_lyrics,
