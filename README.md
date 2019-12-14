@@ -1,7 +1,10 @@
 # Parental oversight on Spotify
 CS410 Text Information Systems Project 
 
-Sam Parmar, Vijay Mishra, Pragya Mishra
+## Team members: 
+* Sam Parmar 
+* Vijay Mishra 
+* Pragya Mishra
 ## Function of tool:
 The project focuses on parental oversight with Spotify. Parents with access and control over their son or daughter’s Spotify accounts will be equipped with a simple tool to analyze trends in listening history and conduct sentiment analysis on the listening choices (listened to songs) of their son or daughter. 
 ## Software implementation documentation:
