@@ -77,7 +77,7 @@ def api_all():
     for d in date_list:    
         history_dict = {}
         df1 = lyricshistory_data[(lyricshistory_data['Timestamp'] == d)]
-        df1.columns = ['timestamp','song','histtimestamp','sentiment', 'lyrics']
+        df1.columns = ['timestamp','song','histtimestamp', 'lyrics', 'sentiment']
         df1 = df1.drop('histtimestamp',axis = 1)
         history_dict['timestamp'] = d
         history_dict['songs'] = df1.to_dict('records')
