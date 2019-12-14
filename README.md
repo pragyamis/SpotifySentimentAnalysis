@@ -11,13 +11,17 @@ CS410 Text Information Systems Project
 out of Sweden
 * Individuals can listen via free memberships or premium memberships. Premium memberships can
 be individual, family or student.
+* As Spotify has gained popularity, more and more children are using the platform to listen to music.
+* As of November 2019, Spotify does not currently have parental control for family accounts.
+   * The feature is being developed by the folks at Spotify for parents to control many family accounts. 
+   * There is an explicit content filter, however accounts must individually have the explicit content filter enabled or disabled.
 
 ## Function of tool:
 The project focuses on parental oversight with Spotify. Parents with access and control over their son or daughter’s Spotify accounts will be equipped with a simple tool to analyze trends in listening history and understand emotional content of the listening choices (listened to songs) of their children. 
 
 ## Use cases: 
 * By allowing parents to track listening history and explore listening trends over time, parents can be alerted  abnormal listening choices or sudden change in listening choices that may indicate a shift in the child's mood. Such a mood change in the child may be due to external circumstances such as bullying or association with bad company. 
-* Additionally, non-parents can also utilize the tool to assess their own music choices. 
+* Additionally, non-parents can also utilize the tool to assess their own music choices which may also coordinate with personal mood. 
 
 ## Software implementation documentation:
 1. Angular UI - front end code (all under angular-app)
