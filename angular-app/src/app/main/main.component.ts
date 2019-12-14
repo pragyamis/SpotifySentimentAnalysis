@@ -20,6 +20,7 @@ export class MainComponent implements OnInit {
   public isVisible = true;
   public songData: IUserInfo;
   public accessToken;
+  public urlSearchParams;
 
   constructor(private _analysisService: SentanalysisService,  private activatedRoute: ActivatedRoute) {
     this.getRouteParams();
@@ -34,19 +35,19 @@ export class MainComponent implements OnInit {
         // URL query parameters
         this.activatedRoute.queryParams.subscribe( params => {
             this.queryParams = params;
-            // TODO - fix this logic
-            // this.accessToken = params.access_token;
-            this.accessToken = "BQCPMHMZUWvjU-EINDyX_pYKBBhCnN3ekPgfZmStWGegntfVSYPn2zWFzO7lw_EIe7RXlhKs1utiHwKqcaHM0YaJF5ZSwxzRDG_ffo8Hj2-RYTuN7jLNCX2jFzjk5G3s3a2z1mysa_Wq7yOAY-Hx0Hpa1xu66sHl51S0zTYYzEFQ6lhRmi-dZBhEzOKgpcHfxMNEDXvZS2zdJeYFEgiWfmzJnaIkaH_TRWfaX9xJTWZYk1GTZBcHqw";
-        });
+       });
     }
 
 
   @Output() public childEvent = new EventEmitter();
 
   ngOnInit() {
+    // Since access_token is coming in as a fragment - reading it from snapshot
+    this.accessToken =     new URLSearchParams(this.activatedRoute.snapshot.fragment).get("access_token");
   }
 
   ngAfterViewInit() {
+    
     this._analysisService.getSongHistory(this.accessToken).subscribe(data => this.processHistoryData(data));
   }
 
