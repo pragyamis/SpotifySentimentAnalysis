@@ -41,10 +41,10 @@ def geniuslyricspull(song_titles):
             song = genius.search_song(song_title, artist=artist_name)
             song_album = song.album
             song_lyrics = re.sub("\n", " ", song.lyrics) #Remove newline breaks, we won't need them.
+            song_lyrics = song_lyrics.str.replace('\[[A-Za-z0-9: ]+\] ','')
             song_url = song.url
             song_artist = song.artist
             song_year = song.year
-
         except:
             song_album = "null"
             song_lyrics = "null"
@@ -61,7 +61,6 @@ def geniuslyricspull(song_titles):
             "Release Date": song_year
         }
         all_song_data = all_song_data.append(row, ignore_index=True)
-
         #print(all_song_data)
-    #all_song_data.to_csv("user1_songlyrics_data.csv")
+        #all_song_data.to_csv("user1_songlyrics_data.csv")
     return all_song_data

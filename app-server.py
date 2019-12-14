@@ -7,12 +7,14 @@ from flask import Flask
 from flask import request, jsonify
 from flask import Flask, redirect, request, session, url_for, jsonify
 from flask_cors import CORS
-import jsons
+import json
 from json import dumps
 from api.utilities import spotifydata
 from api.utilities import geniuslyrics
 import spotipy.util as util
 import sentiment_prediction as sa
+from datetime import date, datetime
+import pandas as pd
 
 #import sentiment_analysis
 
@@ -30,86 +32,51 @@ def get_usertoken():
             client_secret="5edc515babd54bd1959b3a5624cf548e",
             redirect_uri="http://3.15.223.174:4200/main")
 
-def get_songs(data):
-    for p in data['history'][0]['songs']:
-            print('id: ' + p['id'])
-            print('name: ' + p['name'])
-            print('sentiment: ' + p['sentiment'])
-            print('')
-
 @app.route('/', methods=['GET'])
 def home():
     return '''<h1>Songs Sentiment Archive</h1>
 <p>A prototype API for Songs Sentiment Analysis</p>'''
 
-class response_object:
-    username = ''
-    history = []
+def json_serial(obj):
+        """JSON serializer for objects not serializable by default json code"""
 
-class history:
-    timestamp = None
-    songs = []
-
-class song_data:
-    name = ''
-    sentiment = ''
-    lyrics = ''
-
-def dumper(obj):
-    try:
-        return obj.toJSON()
-    except:
-        return obj.__dict__
-
+        if isinstance(obj, (datetime, date)):
+            return obj.isoformat()
+        raise TypeError ("Type %s not serializable" % type(obj))
+        
 # A route to return all of the available entries in our catalog.
 @app.route('/songs', methods=['GET'])
 def api_all():
-    #if 'token' in request.args:
-    #    token = int(request.args['token'])
     token = request.args.get('access_token')
     user_songlisten_data = spotifydata.spotify_current_user_recently_played(token)
-
+    user_songlisten_data['play_timestamp'] = pd.to_datetime(user_songlisten_data['play_times'])
+    user_songlisten_data['history_timestamp'] = user_songlisten_data['play_timestamp'].apply(lambda x: x.date())
+    song_data = user_songlisten_data[["song_names","primary_artist"]]
+    song_data.drop_duplicates()
+    songlisten_data = user_songlisten_data[['play_timestamp','song_names','history_timestamp']]
+    songlisten_data.columns = ['Play Timestamp','Song Title','Timestamp']
+    date_list = set(user_songlisten_data['history_timestamp'])
     song_list = []
-
-    for song in user_songlisten_data:
-        print(song)
-
-
-    lyrics_data = geniuslyrics.geniuslyricspull(user_songlisten_data)
-    lyrics_data['Lyrics'] = lyrics_data['Lyrics'].str.replace('\[[A-Za-z0-9: ]+\] ','')
-
-    for index, song in lyrics_data.iterrows():
-        songObject = song_data()
-        songObject.name = song["Song Title"]
-        songObject.lyrics = song["Lyrics"]
-        songObject.sentiment = sent_p.predict_sentiment(songObject.lyrics)
-        song_list.append(songObject)
-
-    res : response_object = response_object()
-    res.username = ''
-
-    hist = history()
-    hist.songs = song_list
-    hist.timestamp = "12-01-2019"
-
-    hist2 = history()
-    hist2.songs = song_list
-    hist2.timestamp = "12-02-2019"
-
-    hist3 = history()
-    hist3.songs = song_list
-    hist3.timestamp = "12-03-2019"
-
-    res.history.append(hist)
-    res.history.append(hist2)
-    res.history.append(hist3)
-    #app_json = json.dumps(res)
-    app_json = jsons.dumps(res)
-
+    lyrics_data = geniuslyrics.geniuslyricspull(song_data)
+    lyrics_data['Sentiment'] = lyrics_data.Lyrics.apply(lambda x: sent_p.predict_sentiment(x))
+    lyrics_song_data = lyrics_data[["Song Title","Sentiment"]]
+    lyricshistory_data = pd.merge(songlisten_data,lyrics_song_data,on ='Song Title')
+    history = []
+    for d in date_list:    
+        history_dict = {}
+        df1 = lyricshistory_data[(lyricshistory_data['Timestamp'] == d)]
+        df1.columns = ['timestamp','song','histtimestamp','sentiment']
+        df1 = df1.drop('histtimestamp',axis = 1)
+        history_dict['timestamp'] = d
+        history_dict['songs'] = df1.to_dict('records')
+        history.append(history_dict)
+    result = {"user":"","history":history}
+    app_json = json.dumps(result, default=json_serial)
     return app_json
 
     
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=4201)
+
 
 
