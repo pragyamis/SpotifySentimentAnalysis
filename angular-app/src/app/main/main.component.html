@@ -4,3 +4,13 @@
 <h2>Songs Analysis for {{username}}</h2>
 
 <div id="chart"></div>
+
+<ag-grid-angular 
+    style="width: 100%; height: 500px;" 
+    class="ag-theme-balham"
+    [enableFilter]="true"
+    [enableSorting]="true"
+    [pagination]="true"
+    [rowData]="rowData" 
+    [gridOptions]="gridOptions">
+</ag-grid-angular>

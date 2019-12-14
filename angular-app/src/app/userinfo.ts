@@ -10,8 +10,10 @@ export interface IHistory {
 }
 
 export interface ISongs {
-    "name" : string;
+    "song" : string;
     "sentiment" : string;
+    "lyrics" : string;
+    "timestamp" : string;
  }
 
  export class ISongSentimentData {

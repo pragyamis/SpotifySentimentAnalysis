@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import {TopBarComponent} from './top-bar/top-bar.component'
 import {SentanalysisService} from './sentanalysis.service';
 import {HttpClientModule} from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgGridModule.withComponents(null)
   ],
   providers: [SentanalysisService],
   bootstrap: [AppComponent]

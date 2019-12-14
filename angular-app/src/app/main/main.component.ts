@@ -21,6 +21,28 @@ export class MainComponent implements OnInit {
   public songData: IUserInfo;
   public accessToken;
   public urlSearchParams;
+  private gridApi;
+  private columnApi;
+  private gridOptions = {
+    columnDefs : [
+      {headerName: 'Day', field: 'day', width : '100', filter: "agTextColumnFilter"},
+      {headerName: 'Song Title', field: 'song'},
+      {headerName: 'Sentiment', field: 'sentiment', width : '100'},
+      {headerName: 'Lyrics', field: 'lyrics', width : '1200', filter: "agTextColumnFilter"},
+      {headerName: 'Timestamp', field: 'timestamp', width : '300'},
+    ],
+    defaultColDef: {
+      // make every column editable
+      editable: false,
+      // make every column use 'text' filter by default
+      filter: 'agTextColumnFilter',
+      resizable: true,
+      suppressSizeToFit: false
+  },
+}
+
+  rowData = [
+  ];
 
   constructor(private _analysisService: SentanalysisService,  private activatedRoute: ActivatedRoute) {
     this.getRouteParams();
@@ -42,9 +64,19 @@ export class MainComponent implements OnInit {
   @Output() public childEvent = new EventEmitter();
 
   ngOnInit() {
+    
     // Since access_token is coming in as a fragment - reading it from snapshot
     this.accessToken =     new URLSearchParams(this.activatedRoute.snapshot.fragment).get("access_token");
   }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.columnApi = params.columnApi;
+    this.gridApi.sizeColumnsToFit();
+    window.onresize = () => {
+        this.gridApi.sizeColumnsToFit();
+    }
+}
 
   ngAfterViewInit() {
     
@@ -60,6 +92,22 @@ export class MainComponent implements OnInit {
   processSongData(name: string, songData: IUserInfo) {
     let sentArray = new Array<any>();
     this.username = songData.username;
+
+    songData.history.forEach(history => {
+      history.songs.forEach(song => {
+        let record = {
+          day : history.timestamp,
+          timestamp : song.timestamp,
+          song : song.song,
+          sentiment : song.sentiment,
+          lyrics : song.lyrics
+        };
+        this.rowData.push(record);
+      });
+        
+    });
+    this.rowData.push(songData.history);
+
 
     sentArray.push(this.formElement('sadness', songData.history));
     sentArray.push(this.formElement('happiness', songData.history));
@@ -80,6 +128,7 @@ export class MainComponent implements OnInit {
 
   processHistoryData(rawData) {
     this.songData = rawData;
+    this.rowData = [];
     let sentArray = this.processSongData("Vijay", this.songData);
 
     let chart = c3.generate({
