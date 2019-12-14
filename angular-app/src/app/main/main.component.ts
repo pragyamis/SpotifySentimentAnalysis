@@ -109,6 +109,7 @@ export class MainComponent implements OnInit {
     this.rowData.push(songData.history);
 
 
+    sentArray.push(this.formHeader('day', songData.history));
     sentArray.push(this.formElement('sadness', songData.history));
     sentArray.push(this.formElement('happiness', songData.history));
     sentArray.push(this.formElement('anger', songData.history));
@@ -126,6 +127,15 @@ export class MainComponent implements OnInit {
     return dataList;
   }
 
+  formHeader(name: string, historyList: Array<IHistory>) {
+    let dataList = new Array<any>();
+    dataList.push(name);
+    for (let index = 0; index < historyList.length; index++) {
+      dataList.push(historyList[index].timestamp);
+    }
+    return dataList;
+  }
+
   processHistoryData(rawData) {
     this.songData = rawData;
     this.rowData = [];
@@ -134,9 +144,20 @@ export class MainComponent implements OnInit {
     let chart = c3.generate({
       bindto: '#chart',
       data: {
+        x : 'day',
         columns: sentArray
       },
       axis: {
+        x: {
+          label: { // ADD
+            text: 'Timeline',
+            position: 'outer-middle'
+          },
+          type: 'timeseries',
+            tick: {
+                format: '%Y-%m-%d'
+          }
+        },
         y: {
           label: { // ADD
             text: 'Song Count',
