@@ -12,6 +12,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class MainComponent implements OnInit {
 
+  public showMain = true;
+
   @Input('parentData') public parentName;
   routeParams: Params;
   // Query parameters found in the URL: /example-params/one/two?query1=one&query2=two
@@ -87,6 +89,14 @@ export class MainComponent implements OnInit {
     return historyElement.songs.filter(function (element) {
       return element.sentiment == name;
     }).length;
+  }
+
+  public showComponent(compId){
+    if(compId == 'mainComponent'){
+      this.showMain = true;
+    }else{
+      this.showMain = false;
+    }
   }
 
   processSongData(name: string, songData: IUserInfo) {
