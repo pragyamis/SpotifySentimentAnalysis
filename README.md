@@ -11,13 +11,17 @@ CS410 Text Information Systems Project
 out of Sweden
 * Individuals can listen via free memberships or premium memberships. Premium memberships can
 be individual, family or student.
+* As Spotify has gained popularity, more and more children are using the platform to listen to music.
+* As of November 2019, Spotify does not currently have parental control for family accounts.
+   * The feature is being developed by the folks at Spotify for parents to control many family accounts. 
+   * There is an explicit content filter, however accounts must individually have the explicit content filter enabled or disabled.
 
 ## Function of tool:
 The project focuses on parental oversight with Spotify. Parents with access and control over their son or daughter’s Spotify accounts will be equipped with a simple tool to analyze trends in listening history and understand emotional content of the listening choices (listened to songs) of their children. 
 
 ## Use cases: 
 * By allowing parents to track listening history and explore listening trends over time, parents can be alerted  abnormal listening choices or sudden change in listening choices that may indicate a shift in the child's mood. Such a mood change in the child may be due to external circumstances such as bullying or association with bad company. 
-* Additionally, non-parents can also utilize the tool to assess their own music choices. 
+* Additionally, non-parents can also utilize the tool to assess their own music choices which may also coordinate with personal mood. 
 
 ## Software implementation documentation:
 1. Angular UI - front end code (all under angular-app)
@@ -36,9 +40,11 @@ node login_server.js <client id> <secret>
    1. Note: The OAuth 2.0 Implicit Grant type is utilized for authentication w/ short lived access tokens.
 
 ## Software usage documentation:
-1. Visit the following link in your web browser: 
-1. Login with Spotify account
-   1. Authorize access to proceed
+1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
+1. Login with Spotify account. 
+    1. Authorize access to proceed
+    1. Proceed anyways if warning appears that the connection is not private. For this project, we did not purchase a security certificate. 
+    1. If on Mac and using Google Chrome, then please see these stackoverflow [instructions](https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos) or use Firefox.
 1. Wait for tool to process song data
 1. Review music choices and see trends
    1. Emotional content of music choices is plotted in trend graph via sentiment analysis
