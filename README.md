@@ -71,6 +71,9 @@ For training model on sentiments, a subset of tweet data available at https://da
 
 Accuracy of the model trained with Logistic Regression is 58.8%. model-training.log contains the training with details of final result.
 
+Note that model can be improved further by training it against all the data. Because of limited compute power, we couldn’t use the full dataset as process was running out of memory. Also, for sentiment “anger”, very limited dataset was available and that can be improved as well. 
+
+
 ## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
 1. Login with Spotify account. 
