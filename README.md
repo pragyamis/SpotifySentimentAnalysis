@@ -1,4 +1,4 @@
-# Parental oversight on Spotify
+# Parental oversight on Spotify: Sentiment Analysis of Listening Data
 CS410 Text Information Systems Project 
 
 ## Team members: 
