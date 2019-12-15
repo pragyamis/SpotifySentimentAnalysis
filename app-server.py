@@ -29,10 +29,10 @@ sentiment_cache = FileCache('sentiment_cache', flag="cs")
 
 def get_usertoken():
     token = util.prompt_for_user_token(
-            username="psamrai7",
+            username="",
             scope="user-read-recently-played user-read-private user-top-read user-read-currently-playing",
-            client_id="de3fbad698124c53a722cd1283fb2e0d",
-            client_secret="5edc515babd54bd1959b3a5624cf548e",
+            client_id="",
+            client_secret="",
             redirect_uri="http://3.15.223.174:4200/main")
 
 @app.route('/', methods=['GET'])
