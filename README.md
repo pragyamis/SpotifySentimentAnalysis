@@ -69,6 +69,8 @@ For training model on sentiments, a subset of tweet data available at https://da
 |sadness	| 5165 
 |Grand Total	| 19122 
 
+Accuracy of the model trained with Logistic Regression was around 60%.
+
 ## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
 1. Login with Spotify account. 
