@@ -89,6 +89,19 @@ Note that model can be improved further by training it against all the data. Bec
 1. Wait for tool to process song data
 1. Review music choices and see trends
    1. Emotional content of music choices is plotted in trend graph via sentiment analysis
+   
+## Additional notes, limitations, and future direction
+* This tool is only for English songs with lyrics (not non-English languages songs or music without lyrics such as many electronic or classical music songs)
+* Spotify only allows last 50 songs to be retrieved. Persistence in this app to store
+historical information would provide better historical insights. We did not have enough
+time to implement this.
+* Model can be improved further by training it against all the data. Because of limited
+compute power, we couldn’t use the full dataset as machine was running out of
+memory.
+* For Sentiment “anger”, very limited dataset was available and that can be improved
+as well.
+* More views can be generated to provide varying insights into listening history for the
+user. Incorporating Spotify’s own audio features can also help improve this solution.
 
 
 ## Contribution of each team member:
