@@ -50,10 +50,16 @@ node login_server.js <client id> <secret>
 * Amazon Web Services (Infrastructure)
  
 ### Files in the repo:
-* `app-server.py` - main server file
-* `api/` directory - 
-* `angular-app/` - 
-* `prediction-pipeline/` - 
+* `app-server.py` - python app server which implements the rest API for the UI and all the three functions (spotify pull, genius pull, and sentiment analysis)
+* `sentiment_model_training.py` - sentiment model training application to generate the model that we used
+* `prediction-pipeline/` - persistent sentiment analysis model (created by sentiment_model_training.py)
+* `sentiment_prediction.py` - sentiment prediction based on generated sentiment mode (using the prediciton pipeline from sentiment_model_training.py)
+* `dataset` - raw training data for sentiment analysis model we generated
+* `api/` directory - spotify API and genius API implementations 
+* `angular-app/` - user interface and login server code 
+* `additionals` - additional jupyter notebook code which was not integrated due to time constraints
+* `images` - images used in README.md
+
 
 ### Sentiment analysis implementation:
 ![Sentiment Analysis Flow!](images/SentimentAnalysisFlow.PNG)
@@ -70,6 +76,9 @@ For training model on sentiments, a subset of tweet data available at https://da
 |Grand Total	| 19122 
 
 Accuracy of the model trained with Logistic Regression is 58.8%. model-training.log contains the training with details of final result.
+
+Note that model can be improved further by training it against all the data. Because of limited compute power, we couldn’t use the full dataset as process was running out of memory. Also, for sentiment “anger”, very limited dataset was available and that can be improved as well. 
+
 
 ## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
