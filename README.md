@@ -2,9 +2,9 @@
 CS410 Text Information Systems Project (Fall 2019)
 
 ## Team members: 
-* Sam Parmar (team lead) - samirtp2@illinois.edu
-* Vijay Mishra - vijaym2@illinois.edu
-* Pragya Mishra - pragyam3@illinois.edu
+* Sam Parmar (team lead)
+* Vijay Mishra 
+* Pragya Mishra 
 
 ## Background:
 * Spotify is an audio streaming platform created by the Spotify Technology S.A. company originally
