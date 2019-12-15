@@ -50,6 +50,10 @@ node login_server.js <client id> <secret>
 * `api/` directory - 
 * `angular-app/` - 
 * `prediction-pipeline/` - 
+
+### Sentiment analysis implementation:
+1. Insert sentiment analysis model steps here
+1.
  
 ## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
