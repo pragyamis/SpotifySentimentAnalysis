@@ -1,10 +1,10 @@
 # Parental oversight on Spotify: Sentiment Analysis of Listening Data
-CS410 Text Information Systems Project 
+CS410 Text Information Systems Project (Fall 2019)
 
 ## Team members: 
-* Sam Parmar 
-* Vijay Mishra 
-* Pragya Mishra
+* Sam Parmar (team lead) - samirtp2@illinois.edu
+* Vijay Mishra - vijaym2@illinois.edu
+* Pragya Mishra - pragyam3@illinois.edu
 
 ## Background:
 * Spotify is an audio streaming platform created by the Spotify Technology S.A. company originally
@@ -53,7 +53,7 @@ node login_server.js <client id> <secret>
 
 ### Sentiment analysis implementation:
 1. Insert sentiment analysis model steps here
-1.
+1. The following dataset was utilized to train the model: 
  
 ## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
