@@ -39,6 +39,7 @@ directory - angular-app
 node login_server.js <client id> <secret>
    1. Note: The OAuth 2.0 Implicit Grant type is utilized for authentication w/ short lived access tokens.
 
+![Architecture!](images/architecture.PNG)
 ### Tools used in software development: 
 * `Python 3.7`
 * `PySpark`
@@ -55,8 +56,7 @@ node login_server.js <client id> <secret>
 * `prediction-pipeline/` - 
 
 ### Sentiment analysis implementation:
-1. Insert sentiment analysis model steps here
-1. The following dataset was utilized to train the model: 
+![Sentiment Analysis Flow!](images/SentimentAnalysisFlow.PNG)
  
 ## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
