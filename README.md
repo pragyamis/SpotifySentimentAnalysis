@@ -52,14 +52,15 @@ node login_server.js <client id> <secret>
 ### Files in the repo:
 * `app-server.py` - python app server which implements the rest API for the UI and all the three functions (spotify pull, genius pull, and sentiment analysis)
 * `sentiment_model_training.py` - sentiment model training application to generate the model that we used
-* `prediction-pipeline/` - persistent sentiment analysis model (created by sentiment_model_training.py)
+* `model-training.log` - log with output form model generation
+* `prediction-pipeline/` - directory - persistent sentiment analysis model (created by sentiment_model_training.py)
 * `sentiment_prediction.py` - sentiment prediction based on generated sentiment mode (using the prediciton pipeline from sentiment_model_training.py)
 * `dataset` - raw training data for sentiment analysis model we generated
 * `api/` directory - spotify API and genius API implementations 
-* `angular-app/` - user interface and login server code 
-* `additionals` - additional jupyter notebook code which was not integrated due to time constraints
-* `images` - images used in README.md
-
+* `angular-app/` - directory -  user interface and login server code 
+* `additionals/` - directory - additional jupyter notebook code which was not integrated due to time constraints
+* `images/` - directory - images used in README.md
+* `ProjectPresentation.pdf` - Pdf of final project presentation
 
 ### Sentiment analysis implementation:
 ![Sentiment Analysis Flow!](images/SentimentAnalysisFlow.PNG)
