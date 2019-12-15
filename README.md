@@ -24,17 +24,17 @@ The project focuses on parental oversight with Spotify. Parents with access and 
 * Additionally, non-parents can also utilize the tool to assess their own music choices which may also coordinate with personal mood. 
 
 ## Software implementation documentation:
-1. Angular UI - front end code (all under angular-app)
+1. Angular UI - front end code running under port 4200 (under angular-app)
 directory - angular-app  
-ng serve --host 0.0.0.0 --port 4200 --disable-host-check
+ng serve --host 0.0.0.0 --port <port> --disable-host-check
 
-1. App Server (4201) - Backend Server which does all the heavy lifting. this is one which calls spotify, genius and sentiment analysis.
+2. Python App Server (4201) - Backend Server which does all the heavy lifting. Server exposes REST API which performs data pull from Spotify, Lyrics pull from Genius and Sentiyment Analysis with Logistic Regression trained model created offline. Fcache is used to catch Lyrics and Sentiment data to speed processing. First attempt to perform analysis may take a minute but subsequent calls will be faster. 
 python3 app-server.py  
    1. User song data pull with Spotify api
    1. Lyrics data pull Genius api pull (using song info obtained form Spotify api)
    1. Sentiment analysis (using lyrics data obtained from Genius api)
  
-1. Login server (4202) (borrowed Obscurify) this implements the oauth flow for Spotify - we are using implicit authorization.
+3. Login server (4202) (borrowed from Obscurify) implements the oauth flow for Spotify. For this project we are using implicit authorization.
 directory - angular-app
 node login_server.js <client id> <secret>
    1. Note: The OAuth 2.0 Implicit Grant type is utilized for authentication w/ short lived access tokens.
