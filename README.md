@@ -40,7 +40,7 @@ node login_server.js <client id> <secret>
    1. Note: The OAuth 2.0 Implicit Grant type is utilized for authentication w/ short lived access tokens.
 
 ## Software usage documentation:
-1. Visit the following link in your web browser: http://3.15.223.174:4200/
+1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
 1. Login with Spotify account. 
     1. Authorize access to proceed
     1. Proceed anyways if warning appears that the connection is not private. For this project, we did not purchase a security certificate. 
