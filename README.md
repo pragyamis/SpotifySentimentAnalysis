@@ -1,5 +1,5 @@
 # Parental oversight on Spotify: Sentiment Analysis of Listening Data
-CS410 Text Information Systems Project (Fall 2019)
+CS410 Text Information Systems Final Project (Fall 2019)
 
 ## Team members: 
 * Sam Parmar (team lead)
@@ -45,7 +45,7 @@ node login_server.js <client id> <secret>
 * `PySpark`
 * `spotipy`, `lyricsgenius`, `flask`, `json`, `types`, `fcache`, `pyspark.sql`, `pyspack.ml`, `pandas`, and `numpy`  python packages
 * Spotify and Genius Lyrics APIs
-* `Angular 8'
+* `Angular 8`
 * `NodeJs`
 * Amazon Web Services (Infrastructure)
  
