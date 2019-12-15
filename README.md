@@ -57,7 +57,18 @@ node login_server.js <client id> <secret>
 
 ### Sentiment analysis implementation:
 ![Sentiment Analysis Flow!](images/SentimentAnalysisFlow.PNG)
- 
+
+
+For training model on sentiments, a subset of tweet data available at https://data.world/crowdflower/sentiment-analysis-in-text was used. 
+Sentiment | Count of records 
+:-------: | :-----------:
+anger	| 110
+happiness	| 5209
+neutral	| 8638
+sadness	| 5165
+Grand Total	| 19122
+
+
 ## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
 1. Login with Spotify account. 
