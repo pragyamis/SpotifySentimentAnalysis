@@ -44,7 +44,13 @@ node login_server.js <client id> <secret>
 * `spotipy`, `lyricsgenius`, `flask`, `json`, `types`, `fcache`, `pyspark.sql`, `pyspack.ml`, `pandas`, and `numpy`  python packages
 * Spotify and Genius Lyrics APIs
 * Amazon Web Services 
-  
+ 
+### Files in the repo:
+* `app-server.py` - main server file
+* `api/` directory - 
+* `angular-app/` - 
+* `prediction-pipeline/` - 
+ 
 ## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
 1. Login with Spotify account. 
@@ -64,4 +70,4 @@ node login_server.js <client id> <secret>
 
 ## Acknowledgements and References:
 * The Obscurity project was consulted for implementation of login server (https://github.com/alexolivero/Obscurify).
-* The glitch spotify implicit grant template was consulted for OAuth implementation (https://glitch.com/~spotify-implicit-grant).
+* The Glitch spotify implicit grant template was consulted for OAuth implementation (https://glitch.com/~spotify-implicit-grant).
