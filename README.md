@@ -56,8 +56,7 @@ node login_server.js <client id> <secret>
 * `prediction-pipeline/` - 
 
 ### Sentiment analysis implementation:
-1. Insert sentiment analysis model steps here
-1. The following dataset was utilized to train the model: 
+![Sentiment Analysis Flow!](images/SentimentAnalysisFlow.PNG)
  
 ## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
