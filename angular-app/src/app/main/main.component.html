@@ -1,11 +1,13 @@
 <div class="topnav">
-        <a [routerLink]="" (click)="showComponent('mainComponent')" >Spotify Song Analysis</a>
-        <a [routerLink]="" (click)="showComponent('aboutComponent')">About</a>
+        <a [routerLink]="" (click)="showComponent('mainComponent')" >Spotify Sentiment Analysis</a>
+        <a [routerLink]="" (click)="showComponent('aboutComponent')">About Project</a>
 </div>
 
 
 <div id="mainComponent" [style.display]="showMain ? 'block' : 'none'" >
-        <h2>Songs Analysis for {{username}}</h2>
+        <h2>Sentiment Analysis for listening data</h2>
+        <br>
+
         <div id="chart" ></div>
 
         <ag-grid-angular 
@@ -20,9 +22,32 @@
 </div>
 
 <div id="aboutComponent" [style.display]="!showMain ? 'block' : 'none'" class="about-block" [style.visibility]="showMain ? 'collapse' : 'visible' ">
-<p>
-      Spotify Sentiment Analysis is a Project done by Student team at UIUC as part of their course on Text Information System. 
+
+<h3> Parental oversight on Spotify - CS410 Text Information Systems Project </h3>
+
+Spotify Sentiment Analysis is a Project done by Student team at UIUC as part of their course on Text Information System. 
 This project primary demonstration Text retrieval using Spotify and Genius Web API from respective systems. 
 Project also demonstration Sentiment Analysis performed on Song Lyrics based on a trained model to identify emotion in the Song namely sad, happy, anger, etc.
-                                </p>
+
+
+<h3>Team members: </h3>
+<ul>Sam Parmar</ul>
+<ul>Vijay Mishra </ul>
+<ul>Pragya Mishra</ul>
+
+<br>
+<h3> Background: </h3>
+<ul>      Spotify is an audio streaming platform created by the Spotify Technology S.A. company originally
+out of Sweden </ul>  
+<ul> Individuals can listen via free memberships or premium memberships. Premium memberships can
+be individual, family or student. </ul>
+<ul> As Spotify has gained popularity, more and more children are using the platform to listen to music. </ul>
+<ul>As of November 2019, Spotify does not currently have parental control for family accounts. </ul> 
+   * The feature is being developed by the folks at Spotify for parents to control many family accounts. <br>
+   * There is an explicit content filter, however accounts must individually have the explicit content filter enabled or disabled. <br>
+
+<br>
+<h3> Function of tool: </h3>
+The project focuses on parental oversight with Spotify. Parents with access and control over their son or daughter’s Spotify accounts will be equipped with a simple tool to analyze trends in listening history and understand emotional content of the listening choices (listened to songs) of their children. 
+
 </div>

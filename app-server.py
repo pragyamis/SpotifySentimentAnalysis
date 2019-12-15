@@ -73,6 +73,8 @@ def api_all():
         sentiment_data = sentiment_data.append(sent_row, ignore_index=True)
 
     lyricshistory_data = pd.merge(songlisten_data, sentiment_data, on ='Song Title')
+    lyricshistory_data = lyricshistory_data.drop_duplicates()
+
     history = []
     for d in date_list:    
         history_dict = {}
