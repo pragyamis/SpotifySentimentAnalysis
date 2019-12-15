@@ -41,9 +41,12 @@ node login_server.js <client id> <secret>
 
 ### Tools used in software development: 
 * `Python 3.7`
+* `PySpark`
 * `spotipy`, `lyricsgenius`, `flask`, `json`, `types`, `fcache`, `pyspark.sql`, `pyspack.ml`, `pandas`, and `numpy`  python packages
 * Spotify and Genius Lyrics APIs
-* Amazon Web Services 
+* `Angular 8'
+* `NodeJs`
+* Amazon Web Services (Infrastructure)
  
 ### Files in the repo:
 * `app-server.py` - main server file
