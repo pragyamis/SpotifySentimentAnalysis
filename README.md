@@ -69,7 +69,7 @@ For training model on sentiments, a subset of tweet data available at https://da
 |sadness	| 5165 
 |Grand Total	| 19122 
 
-Accuracy of the model trained with Logistic Regression was around 60%.
+Accuracy of the model trained with Logistic Regression is 58.8%. model-training.log contains the training with details of final result.
 
 ## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
