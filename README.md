@@ -39,7 +39,13 @@ directory - angular-app
 node login_server.js <client id> <secret>
    1. Note: The OAuth 2.0 Implicit Grant type is utilized for authentication w/ short lived access tokens.
 
-## Software usage documentation:
+### Tools used in software development: 
+* `Python 3.7`
+* `spotipy`, `lyricsgenius`, `flask`, `json`, `types`, `fcache`, `pyspark.sql`, `pyspack.ml`, `pandas`, and `numpy`  python packages
+* Spotify and Genius Lyrics APIs
+* Amazon Web Services 
+  
+## Software usage documentation (how to use the app):
 1. Visit the following link in your web browser: `http://3.15.223.174:4200/`
 1. Login with Spotify account. 
     1. Authorize access to proceed
@@ -48,6 +54,7 @@ node login_server.js <client id> <secret>
 1. Wait for tool to process song data
 1. Review music choices and see trends
    1. Emotional content of music choices is plotted in trend graph via sentiment analysis
+
 
 ## Contribution of each team member:
 * All team members collectively came up with the idea for the project
