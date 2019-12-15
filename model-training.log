@@ -1,0 +1,116 @@
+C:\Users\vijaymi\AppData\Local\Programs\Python\Python37\python.exe C:/Studies/MCS-TextInformationSystem/project/SpotifySentimentAnalysis/sentiment_model_training.py
+Initializing SentAnalysisModelTraining!!
+19/12/15 15:13:13 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
++---------+------------------------------------------------------------------------------------------------------------------------------------------+
+|sentiment|content                                                                                                                                   |
++---------+------------------------------------------------------------------------------------------------------------------------------------------+
+|sadness  |Layin n bed with a headache  ughhhh...waitin on your call...                                                                              |
+|sadness  |Funeral ceremony...gloomy friday...                                                                                                       |
+|neutral  |@dannycastillo We want to trade with someone who has Houston tickets, but no one will.                                                    |
+|sadness  |I should be sleep, but im not! thinking about an old friend who I want. but he's married now. damn,  he wants me 2! scandalous!           |
+|sadness  |@charviray Charlene my love. I miss you                                                                                                   |
+|sadness  |@kelcouch I'm sorry  at least it's Friday?                                                                                                |
+|neutral  |cant fall asleep                                                                                                                          |
+|sadness  |Ugh! I have to beat this stupid song to get to the next  rude!                                                                            |
+|sadness  |@BrodyJenner if u watch the hills in london u will realise what tourture it is because were weeks and weeks late  i just watch itonlinelol|
+|sadness  |The storm is here and the electricity is gone                                                                                             |
++---------+------------------------------------------------------------------------------------------------------------------------------------------+
+only showing top 10 rows
+
++---------+
+|sentiment|
++---------+
+|  neutral|
+|    anger|
+|happiness|
+|  sadness|
++---------+
+
+DataFrame[sentiment: string, content: string]
++------------------------------------------------------------------------------------------------------------------------------------------+---------+
+|content                                                                                                                                   |sentiment|
++------------------------------------------------------------------------------------------------------------------------------------------+---------+
+|Layin n bed with a headache  ughhhh...waitin on your call...                                                                              |sadness  |
+|Funeral ceremony...gloomy friday...                                                                                                       |sadness  |
+|@dannycastillo We want to trade with someone who has Houston tickets, but no one will.                                                    |neutral  |
+|I should be sleep, but im not! thinking about an old friend who I want. but he's married now. damn,  he wants me 2! scandalous!           |sadness  |
+|@charviray Charlene my love. I miss you                                                                                                   |sadness  |
+|@kelcouch I'm sorry  at least it's Friday?                                                                                                |sadness  |
+|cant fall asleep                                                                                                                          |neutral  |
+|Ugh! I have to beat this stupid song to get to the next  rude!                                                                            |sadness  |
+|@BrodyJenner if u watch the hills in london u will realise what tourture it is because were weeks and weeks late  i just watch itonlinelol|sadness  |
+|The storm is here and the electricity is gone                                                                                             |sadness  |
++------------------------------------------------------------------------------------------------------------------------------------------+---------+
+only showing top 10 rows
+
+Training data rows: 17240 ; Testing data rows: 1882
+19/12/15 15:13:38 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeSystemBLAS
+19/12/15 15:13:38 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeRefBLAS
+The area under ROC for train set after CV  is 0.9844575481549515
+Training is done!
+The area under ROC for test set after CV  is 0.5802128879241838
+Testing is done!
++----------------------------------------------------------------------------------------------------------------------------------+----------+-----+---------+
+|RelevantWords                                                                                                                     |prediction|label|sentiment|
++----------------------------------------------------------------------------------------------------------------------------------+----------+-----+---------+
+|[, #3criminy, cuteness!, http://tinyurl.com/cd8yab, #sinfest]                                                                     |0.0       |0.0  |neutral  |
+|[#3wordsaftersex, started]                                                                                                        |0.0       |0.0  |neutral  |
+|[#3wordsaftersex, goodbye, innocence!!!]                                                                                          |0.0       |0.0  |neutral  |
+|[#3wordsaftersex, hurts]                                                                                                          |2.0       |2.0  |sadness  |
+|[#3wordsaftersex, never, started...]                                                                                              |0.0       |0.0  |neutral  |
+|[#3wordsaftersex, turn, yet?]                                                                                                     |0.0       |0.0  |neutral  |
+|[#bgt, dcd, seniors, good,, good, enough.]                                                                                        |0.0       |0.0  |neutral  |
+|[#bgt, little, holly, perform, tomorrow, night's, final?, poor, little, mite, looked, terrified., brave, fantastic, voice, scared]|0.0       |0.0  |neutral  |
+|[#canucks, seem, falling, lot., must, mean, skating, extra, hard, tonight.]                                                       |0.0       |0.0  |neutral  |
+|[#depechemode, concert, next, week, cancelled, , alternative, date, known, yet., dave, gahan, tumor.]                             |2.0       |2.0  |sadness  |
+|[#duckraces, bath, quite, work, , especially, ducks!, polar, bear,a, seal, , whale.]                                              |0.0       |0.0  |neutral  |
+|[#ff, @arieschild, vegas, buddy, , laker, lover, uuugh, love, even, though, way, n, chicago]                                      |1.0       |1.0  |happiness|
+|[#happy, stars, wars, day....me's, ja-ja, binks, ha, , crappy, day, outside, though, ah, well, makes, bit, motivation, revise]    |1.0       |1.0  |happiness|
+|[#phped, 5.6, running, successfuly, via, #wine, ,, get, ems, running]                                                             |1.0       |1.0  |happiness|
+|[#sanctuarysunday, @sus555, thanks, joining, #sanctuarysunday,, follow, sanctuary, people, keep, date, tweets!]                   |0.0       |0.0  |neutral  |
+|[#sanctuarysunday, forget, post, forums, fb, mission, success!!]                                                                  |0.0       |0.0  |neutral  |
+|[#sanctuarysunday, fav, character, @pegasusangel, ashley!, , why?, cause, awesome]                                                |1.0       |1.0  |happiness|
+|[#supernatural, 9:30pm, #ten.., counting, down..]                                                                                 |0.0       |0.0  |neutral  |
+|[#asylm, yay, registered, lost, friends]                                                                                          |2.0       |2.0  |sadness  |
+|[#bgt, aw, bless, her,, stomach, sank, first, whimpered, good, trying, carry, on., nice, simon, take, charge.]                    |1.0       |1.0  |happiness|
++----------------------------------------------------------------------------------------------------------------------------------+----------+-----+---------+
+only showing top 20 rows
+
+correct prediction: 1107 , total data: 1882 , accuracy: 0.5882040382571733
+False positive rate by label:
+label 0: 0.019553958355353555
+label 1: 0.00366329537309867
+label 2: 0.002945156411685107
+label 3: 0.0
+True positive rate by label:
+label 0: 0.9907443116081759
+label 1: 0.9835575485799701
+label 2: 0.9749839640795381
+label 3: 0.9801980198019802
+Precision by label:
+label 0: 0.9765585402939686
+label 1: 0.9901117798796216
+label 2: 0.9919512725690668
+label 3: 1.0
+Recall by label:
+label 0: 0.9907443116081759
+label 1: 0.9835575485799701
+label 2: 0.9749839640795381
+label 3: 0.9801980198019802
+F-measure by label:
+label 0: 0.9836002807734031
+label 1: 0.9868237814675951
+label 2: 0.983394436057796
+label 3: 0.99
+Accuracy: 0.9844547563805104
+FPR: 0.010617166520647774
+TPR: 0.9844547563805105
+F-measure: 0.9844575481549515
+Precision: 0.9845532744738151
+Recall: 0.9844547563805105
+19/12/15 15:19:04 WARN TaskSetManager: Stage 196 contains a task of very large size (358 KB). The maximum recommended task size is 100 KB.
+
+Process finished with exit code 0
