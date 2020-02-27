@@ -15,7 +15,8 @@ be individual, family or student.
 * As of November 2019, Spotify does not currently have parental control for family accounts.
    * The feature is being developed by the folks at Spotify for parents to control many family accounts. 
    * There is an explicit content filter, however accounts must individually have the explicit content filter enabled or disabled.
-
+## Youtube video:
+https://youtu.be/xyhX2q-Mq7o
 ## Function of tool:
 The project focuses on parental oversight with Spotify. Parents with access and control over their son or daughter’s Spotify accounts will be equipped with a simple tool to analyze trends in listening history and understand emotional content of the listening choices (listened to songs) of their children. 
 
